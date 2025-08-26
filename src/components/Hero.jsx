@@ -260,7 +260,7 @@ const Hero = () => {
                   className="relative"
                 >
                   <motion.img
-                    src="/images/My_pic.png"
+                   src="/images/My_pic.png"
                     alt="Naeem Khan - Web Developer"
                     className={`w-60 h-60 md:w-96 md:h-96 object-cover rounded-full border-4 border-primary/20 shadow-2xl ${
                       isDark ? 'filter grayscale' : 'filter-none'

@@ -360,7 +360,7 @@ const About = () => {
               >
                 <div className="relative">
                   <motion.img
-                    src="/src/assets/My_about_pic.png"
+                    src="/images/My_about_pic.png"
                     alt="Naeem Khan - Web Developer"
                     className={`w-48 h-48 object-cover rounded-full border-4 ${
                       isDark 
