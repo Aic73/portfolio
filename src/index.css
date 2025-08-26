@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary: #FA6900;
+  --primary-light: #FF8C42;
+  --secondary: #0F0F0F;
+  --secondary-light: #F8FAFC;
+  --accent: #191919;
+  --accent-light: #E2E8F0;
+}
+
+/* Apply base styles directly to html and body */
+html {
+  @apply transition-colors duration-300;
+}
+
+body {
+  @apply bg-secondary text-white font-roboto m-0 p-0 transition-colors duration-300;
+}
+
+/* Dark mode styles - more specific selector */
+html.dark body {
+  background: #F8FAFC !important;
+  color: #0F0F0F !important;
+}
+
+/* Remove the layer base section and replace with direct styles */
+.glass-effect {
+  background: rgba(25, 25, 25, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html.dark .glass-effect {
+  background: rgba(226, 232, 240, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+.btn-primary {
+  background: #FA6900;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: #FF8C42;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: #FA6900;
+  color: #FA6900;
+}
+
+html.dark .btn-secondary {
+  border: 1px solid #0F0F0F;
+  color: #0F0F0F;
+}
+
+html.dark .btn-secondary:hover {
+  border-color: #FA6900;
+  color: #FA6900;
+}
+
+.theme-transition {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #191919;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FA6900;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF8C42;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

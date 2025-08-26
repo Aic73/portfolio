@@ -1,0 +1,35 @@
+# Project Structure Summary
+
+📄 .gitignore
+⚛️ eslint.config.js
+🌐 index.html
+📋 package-lock.json
+📋 package.json
+⚛️ postcss.config.js
+⚛️ project-summary.js
+📁 public
+  📄 vite.svg
+📄 README.md
+📁 src
+  🎨 App.css
+  ⚛️ App.jsx
+  📁 assets
+    📄 My_about_pic.png
+    📄 My_CV.pdf
+    📄 My_pic.png
+    📄 react.svg
+  📁 components
+    ⚛️ About.jsx
+    ⚛️ Contact.jsx
+    ⚛️ Header.jsx
+    ⚛️ Hero.jsx
+    ⚛️ PageLoader.jsx
+    ⚛️ Projects.jsx
+    ⚛️ ThemeToggle.jsx
+  📁 contexts
+    ⚛️ ThemeContext.jsx
+  🎨 index.css
+  ⚛️ main.jsx
+⚛️ tailwind.config.js
+📄 testing.txt
+⚛️ vite.config.js
