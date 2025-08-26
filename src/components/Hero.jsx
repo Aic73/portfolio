@@ -259,17 +259,17 @@ const Hero = () => {
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="relative"
                 >
-                  <motion.img
-                   src="/images/My_pic.png"
-                    alt="Naeem Khan - Web Developer"
-                    className={`w-60 h-60 md:w-96 md:h-96 object-cover rounded-full border-4 border-primary/20 shadow-2xl ${
-                      isDark ? 'filter grayscale' : 'filter-none'
-                    } transition-all duration-500`}
-                    loading="eager"
-                    onError={(e) => {
-                      // e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80";
-                    }}
-                  />
+
+
+<motion.img
+  src="/images/My_pic.webp"
+  alt="Naeem Khan - Web Developer"
+  className={`w-60 h-60 md:w-96 md:h-96 object-cover rounded-full border-4 border-primary/20 shadow-2xl ${
+    isDark ? 'filter grayscale' : 'filter-none'
+  } transition-all duration-500`}
+  loading="lazy" // Add lazy loading
+  decoding="async" // Add async decoding
+/>
                   
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-full" />

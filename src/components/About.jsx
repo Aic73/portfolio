@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
+import { useInView } from 'react-intersection-observer';
+
+// Then replace the custom useInView implementation
 import { 
   FaCode, 
   FaPaintBrush, 
@@ -31,11 +34,13 @@ import {
 // Counter component for animated numbers
 const Counter = ({ end, duration = 2 }) => {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.5 });
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+    triggerOnce: true
+  });
 
   useEffect(() => {
-    if (isInView) {
+    if (inView) {
       let start = 0;
       const increment = end / (duration * 60); // 60fps
 
@@ -51,33 +56,33 @@ const Counter = ({ end, duration = 2 }) => {
 
       return () => clearInterval(timer);
     }
-  }, [isInView, end, duration]);
+  }, [inView, end, duration]);
 
   return <span ref={ref}>{count}+</span>;
 };
 
 // Custom hook to check if element is in viewport
-const useInView = (ref, options) => {
-  const [isInView, setIsInView] = useState(false);
+// const useInView = (ref, options) => {
+//   const [isInView, setIsInView] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsInView(entry.isIntersecting);
-    }, options);
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(([entry]) => {
+//       setIsInView(entry.isIntersecting);
+//     }, options);
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+//     if (ref.current) {
+//       observer.observe(ref.current);
+//     }
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [ref, options]);
+//     return () => {
+//       if (ref.current) {
+//         observer.unobserve(ref.current);
+//       }
+//     };
+//   }, [ref, options]);
 
-  return isInView;
-};
+//   return isInView;
+// };
 
 // 3D Icon Component with enhanced effects
 const TechIcon3D = ({ icon, isDark, name }) => {
@@ -360,18 +365,13 @@ const About = () => {
               >
                 <div className="relative">
                   <motion.img
-                    src="/images/My_about_pic.png"
+                    src="/images/My_about_pic.webp"
                     alt="Naeem Khan - Web Developer"
                     className={`w-48 h-48 object-cover rounded-full border-4 ${
                       isDark 
                         ? 'border-primary/30 filter grayscale' 
                         : 'border-primary/20 filter-none'
                     } shadow-2xl transition-all duration-500`}
-                    onError={(e) => {
-                      
-                      
-                      // e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80";
-                    }}
                   />
                   
                   {/* Floating elements */}
