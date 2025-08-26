@@ -365,7 +365,7 @@ const About = () => {
               >
                 <div className="relative">
                   <motion.img
-                    src="/images/My_about_pic.webp"
+                     src="/images/My_pic.webp"
                     alt="Naeem Khan - Web Developer"
                     className={`w-48 h-48 object-cover rounded-full border-4 ${
                       isDark 
