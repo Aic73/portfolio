@@ -8,36 +8,7 @@ export default defineConfig({
   plugins: [
 
     react(),
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
-      manifest: {
-        name: 'Naeem Khan - Portfolio',
-        short_name: 'Naeem Portfolio',
-        description: 'Portfolio of Naeem Khan, a full-stack developer',
-        theme_color: '#FA6900',
-        background_color: '#0F0F0F',
-        display: 'standalone',
-        icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
-      }
-    }),
+
 
     compression()
 

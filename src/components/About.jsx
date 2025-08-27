@@ -365,8 +365,13 @@ const About = () => {
               >
                 <div className="relative">
                   <motion.img
-                     src="/images/My_about_pic.webp"
-                    alt="Naeem Khan - Web Developer"
+  src="/images/My_about_pic.webp"  // Should be webp
+  alt="Naeem Khan - Web Developer"
+    loading="lazy"  // Add this
+  decoding="async" // Add this
+    width={384}  // Add actual image width
+  height={384} // Add actual image height
+
                     className={`w-48 h-48 object-cover rounded-full border-4 ${
                       isDark 
                         ? 'border-primary/30 filter grayscale' 
