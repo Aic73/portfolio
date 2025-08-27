@@ -262,7 +262,7 @@ const Hero = () => {
 
 
 <motion.img
-  src="/images/My_about_pic.webp"
+  src="/images/My_pic.webp"
   alt="Naeem Khan - Web Developer"
   loading="lazy"
   decoding="async"
