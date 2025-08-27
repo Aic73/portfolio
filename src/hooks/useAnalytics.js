@@ -15,22 +15,40 @@ const useAnalytics = () => {
       
       // Create a function to initialize GA
       const initGA = () => {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-        
-        script.onerror = () => {
-          console.warn('Failed to load Google Analytics script');
+        // First, check if we can access the domain
+        const testConnection = () => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = 'https://www.googletagmanager.com/favicon.ico?cache=' + Date.now();
+            setTimeout(() => resolve(false), 2000);
+          });
         };
         
-        document.head.appendChild(script);
-        
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){window.dataLayer.push(arguments);}
-        window.gtag('js', new Date());
-        window.gtag('config', measurementId);
-        
-        console.log('Google Analytics initialized with ID:', measurementId);
+        testConnection().then((isAccessible) => {
+          if (!isAccessible) {
+            console.warn('Google Analytics domain not accessible. This might be due to network restrictions or ad blockers.');
+            return;
+          }
+          
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+          
+          script.onerror = () => {
+            console.warn('Failed to load Google Analytics script. This might be due to network restrictions or ad blockers.');
+          };
+          
+          document.head.appendChild(script);
+          
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){window.dataLayer.push(arguments);}
+          window.gtag('js', new Date());
+          window.gtag('config', measurementId);
+          
+          console.log('Google Analytics initialized with ID:', measurementId);
+        });
       };
       
       // Try to initialize, but catch any errors
