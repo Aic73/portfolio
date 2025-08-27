@@ -11,22 +11,34 @@ const useAnalytics = () => {
         return;
       }
       
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-      
-      script.onerror = () => {
-        console.error('Failed to load Google Analytics script');
+      // Check if we can resolve the domain first
+      const testImage = new Image();
+      testImage.onload = function() {
+        // Domain is accessible, load the script
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+        
+        script.onerror = () => {
+          console.error('Failed to load Google Analytics script');
+        };
+        
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', measurementId);
+        
+        console.log('Google Analytics initialized with ID:', measurementId);
       };
       
-      document.head.appendChild(script);
+      testImage.onerror = function() {
+        console.error('Google Analytics domain not accessible');
+      };
       
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', measurementId);
-      
-      console.log('Google Analytics initialized with ID:', measurementId);
+      // Try to load a tiny image from the domain to test accessibility
+      testImage.src = 'https://www.googletagmanager.com/favicon.ico?' + Date.now();
     } else if (import.meta.env.DEV || isLocalhost) {
       console.log('Google Analytics would initialize with ID:', measurementId, '(but skipped on localhost)');
     }

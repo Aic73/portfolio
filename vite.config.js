@@ -1,30 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import compression from 'vite-plugin-compression' // Correct import
+import compression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-
     react(),
-
-
     compression()
-
-    
-
-
   ],
-
-
-
-
-
-
-
-
-
-    // ... other config
   build: {
     rollupOptions: {
       output: {
@@ -36,50 +19,14 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
   },
-
-
-
-
-    server: {
-    host: true,   // exposes to your local network
-    port: 5174,   // optional: choose port
+  server: {
+    host: true,
+    port: 5174,
   },
-
-
-
-
-
-
-
-   test: {
+  test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.js',
-  },
-
-
-  
-
-
+  }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
