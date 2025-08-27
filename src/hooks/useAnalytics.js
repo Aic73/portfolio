@@ -1,3 +1,4 @@
+// Update your useAnalytics hook with this implementation
 const useAnalytics = () => {
   useEffect(() => {
     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
@@ -5,16 +6,32 @@ const useAnalytics = () => {
                         window.location.hostname === '127.0.0.1';
     
     // Only initialize in production with a valid ID and not on localhost
-    if (import.meta.env.PROD && !isLocalhost && measurementId && measurementId !== 'YOUR_MEASUREMENT_ID') {
+    if (import.meta.env.PROD && !isLocalhost && measurementId && measurementId !== 'G-Z6JLYLTRS4') {
       // Check if script already exists
       if (document.querySelector('script[src*="googletagmanager.com"]')) {
         return;
       }
       
-      // Check if we can resolve the domain first
-      const testImage = new Image();
-      testImage.onload = function() {
-        // Domain is accessible, load the script
+      // First, check if we can access the Google Analytics domain
+      const testConnection = () => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          img.src = 'https://www.googletagmanager.com/favicon.ico?cache=' + Date.now();
+          
+          // Timeout after 2 seconds
+          setTimeout(() => resolve(false), 2000);
+        });
+      };
+      
+      testConnection().then((isAccessible) => {
+        if (!isAccessible) {
+          console.warn('Google Analytics domain not accessible. Skipping initialization.');
+          return;
+        }
+        
+        // Load the script
         const script = document.createElement('script');
         script.async = true;
         script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
@@ -31,14 +48,7 @@ const useAnalytics = () => {
         gtag('config', measurementId);
         
         console.log('Google Analytics initialized with ID:', measurementId);
-      };
-      
-      testImage.onerror = function() {
-        console.error('Google Analytics domain not accessible');
-      };
-      
-      // Try to load a tiny image from the domain to test accessibility
-      testImage.src = 'https://www.googletagmanager.com/favicon.ico?' + Date.now();
+      });
     } else if (import.meta.env.DEV || isLocalhost) {
       console.log('Google Analytics would initialize with ID:', measurementId, '(but skipped on localhost)');
     }
