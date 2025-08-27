@@ -7,28 +7,50 @@ const useAnalytics = () => {
                         window.location.hostname === '127.0.0.1';
     
     // Only initialize in production with a valid ID and not on localhost
-    if (import.meta.env.PROD && !isLocalhost && measurementId && measurementId !== 'G-Z6JLYLTRS4') {
+    if (import.meta.env.PROD && !isLocalhost && measurementId && measurementId !== 'YOUR_MEASUREMENT_ID') {
       // Check if script already exists
       if (document.querySelector('script[src*="googletagmanager.com"]')) {
         return;
       }
       
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-      
-      script.onerror = () => {
-        console.error('Failed to load Google Analytics script');
+      // Test if we can access the Google Analytics domain first
+      const testConnection = () => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          // Use a small image from the domain to test connectivity
+          img.src = 'https://www.googletagmanager.com/favicon.ico?cache=' + Date.now();
+          
+          // Timeout after 3 seconds
+          setTimeout(() => resolve(false), 3000);
+        });
       };
       
-      document.head.appendChild(script);
-      
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', measurementId);
-      
-      console.log('Google Analytics initialized with ID:', measurementId);
+      testConnection().then((isAccessible) => {
+        if (!isAccessible) {
+          console.warn('Google Analytics domain not accessible. This might be due to network restrictions or ad blockers.');
+          return;
+        }
+        
+        // Load the script
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+        
+        script.onerror = () => {
+          console.warn('Failed to load Google Analytics script. This might be due to network restrictions or ad blockers.');
+        };
+        
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', measurementId);
+        
+        console.log('Google Analytics initialized with ID:', measurementId);
+      });
     } else if (import.meta.env.DEV || isLocalhost) {
       console.log('Google Analytics would initialize with ID:', measurementId, '(but skipped on localhost)');
     }
