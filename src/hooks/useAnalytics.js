@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-
+// Update your useAnalytics hook with this implementation
 const useAnalytics = () => {
   useEffect(() => {
     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
@@ -13,17 +12,14 @@ const useAnalytics = () => {
         return;
       }
       
-      // Test if we can access the Google Analytics domain first
+      // Test connection to Google Analytics domain
       const testConnection = () => {
         return new Promise((resolve) => {
           const img = new Image();
           img.onload = () => resolve(true);
           img.onerror = () => resolve(false);
-          // Use a small image from the domain to test connectivity
           img.src = 'https://www.googletagmanager.com/favicon.ico?cache=' + Date.now();
-          
-          // Timeout after 3 seconds
-          setTimeout(() => resolve(false), 3000);
+          setTimeout(() => resolve(false), 2000);
         });
       };
       
@@ -57,7 +53,7 @@ const useAnalytics = () => {
   }, []);
 };
 
-// Function to track custom events
+// Make sure to export trackEvent
 export const trackEvent = (category, action, label, value) => {
   if (window.gtag) {
     window.gtag('event', action, {
