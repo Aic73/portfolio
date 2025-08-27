@@ -364,20 +364,20 @@ const About = () => {
                 className="mb-8 flex justify-center lg:justify-start"
               >
                 <div className="relative">
-                  <motion.img
-  src="/images/My_about_pic.webp"  // Should be webp
+// For your About component
+<motion.img
+  src="/images/My_about_pic.webp"
   alt="Naeem Khan - Web Developer"
-    loading="lazy"  // Add this
-  decoding="async" // Add this
-    width={384}  // Add actual image width
-  height={384} // Add actual image height
-
-                    className={`w-48 h-48 object-cover rounded-full border-4 ${
-                      isDark 
-                        ? 'border-primary/30 filter grayscale' 
-                        : 'border-primary/20 filter-none'
-                    } shadow-2xl transition-all duration-500`}
-                  />
+  loading="lazy"
+  decoding="async"
+  width={384}
+  height={384}
+  className={`w-48 h-48 object-cover rounded-full border-4 ${
+    isDark 
+      ? 'border-primary/30 filter grayscale' 
+      : 'border-primary/20 filter-none'
+  } shadow-2xl transition-all duration-500`}
+/>
                   
                   {/* Floating elements */}
                   <motion.div

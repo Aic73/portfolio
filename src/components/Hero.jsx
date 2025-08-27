@@ -260,7 +260,7 @@ const Hero = () => {
                   className="relative"
                 >
 
-
+// For your Hero component
 <motion.img
   src="/images/My_pic.webp"
   alt="Naeem Khan - Web Developer"
@@ -268,7 +268,6 @@ const Hero = () => {
   decoding="async"
   width={384}
   height={384}
-  
   className={`w-60 h-60 md:w-96 md:h-96 object-cover rounded-full border-4 border-primary/20 shadow-2xl ${
     isDark ? 'filter grayscale' : 'filter-none'
   } transition-all duration-500`}

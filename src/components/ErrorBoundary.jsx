@@ -31,7 +31,7 @@ class ErrorBoundary extends React.Component {
               <summary>Error details</summary>
               {this.state.error && this.state.error.toString()}
               <br />
-              {this.state.errorInfo.componentStack}
+              {this.state.errorInfo?.componentStack}
             </details>
             <button
               className="bg-primary text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors"
