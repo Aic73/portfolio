@@ -364,7 +364,6 @@ const About = () => {
                 className="mb-8 flex justify-center lg:justify-start"
               >
                 <div className="relative">
-// For your About component
 <motion.img
   src="/images/My_about_pic.webp"
   alt="Naeem Khan - Web Developer"

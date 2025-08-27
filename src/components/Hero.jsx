@@ -259,8 +259,6 @@ const Hero = () => {
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="relative"
                 >
-
-// For your Hero component
 <motion.img
   src="/images/My_pic.webp"
   alt="Naeem Khan - Web Developer"
