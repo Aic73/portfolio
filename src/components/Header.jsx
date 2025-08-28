@@ -263,7 +263,7 @@ const Header = () => {
           overflow: 'hidden'
         }}
       >
-        <div className="mx-auto px-4 md:px-6 flex justify-between items-center w-full max-w-full">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-0 flex justify-between items-center">
           {/* Logo */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
