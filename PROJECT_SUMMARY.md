@@ -1,5 +1,6 @@
 # Project Structure Summary
 
+📄 .env
 📄 .gitignore
 ⚛️ eslint.config.js
 🌐 index.html
@@ -7,29 +8,40 @@
 📋 package.json
 ⚛️ postcss.config.js
 ⚛️ project-summary.js
+📄 PROJECT_SUMMARY.md
 📁 public
-  📄 vite.svg
+  📁 images
+    📄 My_about_pic.webp
+    📄 My_pic.webp
 📄 README.md
 📁 src
   🎨 App.css
   ⚛️ App.jsx
   📁 assets
-    📄 My_about_pic.png
     📄 My_CV.pdf
-    📄 My_pic.png
+    📄 portfolio_Favicon.svg
     📄 react.svg
   📁 components
     ⚛️ About.jsx
     ⚛️ Contact.jsx
+    ⚛️ ErrorBoundary.jsx
+    ⚛️ Footer.jsx
     ⚛️ Header.jsx
     ⚛️ Hero.jsx
+    ⚛️ NotFound.jsx
     ⚛️ PageLoader.jsx
     ⚛️ Projects.jsx
+    ⚛️ SEO.jsx
     ⚛️ ThemeToggle.jsx
   📁 contexts
     ⚛️ ThemeContext.jsx
+  📁 hooks
+    ⚛️ useAnalytics.js
+    ⚛️ useDocumentHead.js
   🎨 index.css
   ⚛️ main.jsx
+  📁 utils
+    ⚛️ webVitals.js
 ⚛️ tailwind.config.js
 📄 testing.txt
 ⚛️ vite.config.js
