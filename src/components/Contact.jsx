@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { trackEvent } from '../hooks/useAnalytics';
+import emailjs from 'emailjs-com';
 
 import { 
   FaEnvelope, 
@@ -37,21 +38,39 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-
-     trackEvent('Contact', 'Form Submission', 'Contact Form Submitted');
-     
-    // Simulate form submission
+    trackEvent('Contact', 'Form Submission', 'Contact Form Submitted');
+    
     try {
-      // In a real application, you would send the data to your backend here
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      // Send email using EmailJS with your credentials
+      const result = await emailjs.send(
+        'service_dytkabq', // Your service ID
+        'template_n3yf9h9', // Your template ID
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          title: formData.subject || 'Contact Form Submission'
+        },
+        'L7xcXcbsOLoE4yZ_Z' // Replace with your actual User ID
+      );
+      
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        trackEvent('Contact', 'Form Success', 'Email sent successfully');
+      } else {
+        setSubmitStatus('error');
+        trackEvent('Contact', 'Form Error', 'Email failed to send');
+      }
     } catch (error) {
+      console.error('Email sending failed:', error);
       setSubmitStatus('error');
+      trackEvent('Contact', 'Form Error', 'Email sending failed');
     } finally {
       setIsSubmitting(false);
-      // Clear status after 3 seconds
-      setTimeout(() => setSubmitStatus(null), 3000);
+      // Clear status after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
     }
   };
 
@@ -118,6 +137,7 @@ const Contact = () => {
                     className={`hover:text-primary transition-colors ${
                       isDark ? 'text-gray-400' : 'text-gray-600'
                     }`}
+                    onClick={() => trackEvent('Contact', 'Email Click', 'aicnaeem73@gmail.com')}
                   >
                     aicnaeem73@gmail.com
                   </a>
@@ -139,6 +159,7 @@ const Contact = () => {
                     className={`hover:text-primary transition-colors ${
                       isDark ? 'text-gray-400' : 'text-gray-600'
                     }`}
+                    onClick={() => trackEvent('Contact', 'Phone Click', '+923350595282')}
                   >
                     +92 335 0595282
                   </a>
@@ -182,6 +203,7 @@ const Contact = () => {
                         : 'bg-gray-200 hover:bg-primary text-gray-700 hover:text-white'
                     }`}
                     aria-label={social.label}
+                    onClick={() => trackEvent('Social', 'Click', social.label)}
                   >
                     {social.icon}
                   </motion.a>
@@ -338,13 +360,13 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={`mt-4 p-3 rounded-lg text-center ${
                       submitStatus === 'success'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
+                        ? 'bg-green-100 text-green-800 border border-green-200'
+                        : 'bg-red-100 text-red-800 border border-red-200'
                     }`}
                   >
                     {submitStatus === 'success'
                       ? '✅ Message sent successfully! I\'ll get back to you soon.'
-                      : '❌ Something went wrong. Please try again.'}
+                      : '❌ Something went wrong. Please try again or contact me directly at aicnaeem73@gmail.com'}
                   </motion.div>
                 )}
               </form>
